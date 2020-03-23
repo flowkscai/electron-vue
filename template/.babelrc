@@ -1,41 +1,37 @@
 {
   "comments": false,
   "env": {
-{{#testing unit e2e}}
-    "test": {
+  {{#testing unit e2e}}
+  "test": {
       "presets": [
-        ["env", {
-          "targets": { "node": 7 }
-        }],
-        "stage-0"
+        ["@babel/env", {
+          "targets": { "node": 12 }
+        }]
       ],
       "plugins": ["istanbul"]
     },
-{{/testing}}
-    "main": {
+  {{/testing}}
+  "main": {
       "presets": [
-        ["env", {
-          "targets": { "node": 7 }
-        }],
-        "stage-0"
+        ["@babel/env", {
+          "targets": { "node": 12 }
+        }]
       ]
     },
     "renderer": {
       "presets": [
-        ["env", {
+        ["@babel/env", {
           "modules": false
-        }],
-        "stage-0"
+        }]
       ]
     },
     "web": {
       "presets": [
-        ["env", {
+        ["@babel/env", {
           "modules": false
-        }],
-        "stage-0"
+        }]
       ]
     }
   },
-  "plugins": ["transform-runtime"]
+  "plugins": ["@babel/transform-runtime"]
 }

@@ -95,7 +95,8 @@ let rendererConfig = {
           loader: 'url-loader',
           query: {
             limit: 10000,
-            name: 'imgs/[name]--[folder].[ext]'
+            name: 'imgs/[name]--[folder].[ext]',
+            esModule: false
           }
         }
       },
@@ -104,7 +105,8 @@ let rendererConfig = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: 'media/[name]--[folder].[ext]'
+          name: 'media/[name]--[folder].[ext]',
+          esModule: false
         }
       },
       {
@@ -113,7 +115,8 @@ let rendererConfig = {
           loader: 'url-loader',
           query: {
             limit: 10000,
-            name: 'fonts/[name]--[folder].[ext]'
+            name: 'fonts/[name]--[folder].[ext]',
+            esModule: false
           }
         }
       }
@@ -129,6 +132,18 @@ let rendererConfig = {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: path.resolve(__dirname, '../src/index.ejs'),
+      templateParameters(compilation, assets, options) {
+        return {
+          compilation: compilation,
+          webpack: compilation.getStats().toJson(),
+          webpackConfig: compilation.options,
+          htmlWebpackPlugin: {
+            files: assets,
+            options: options
+          },
+          process,
+        };
+      },
       minify: {
         collapseWhitespace: true,
         removeAttributeQuotes: true,

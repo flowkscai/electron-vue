@@ -1,5 +1,6 @@
 'use strict'
 
+const assert = require('assert');
 const { join } = require('path')
 const { readFileSync, writeFileSync } = require('fs')
 const { get } = require('https')
@@ -145,7 +146,7 @@ module.exports = {
     deps (plugins) {
       let output = ''
       let dependencies = {
-        'axios': '^0.18.0',
+        'axios': '^0.19.2',
         'vue-electron': '^1.0.6',
         'vue-router': '^3.0.1',
         'vuex': '^3.0.1',
@@ -165,6 +166,10 @@ module.exports = {
       if (unit || e2e) {
         return opts.fn(this)
       }
+    },
+    pascalcase (val) {
+      assert(typeof val === 'string');
+      return val.split(/[^a-zA-Z0-9]+/).map(s => s && (s[0].toLocaleUpperCase() + s.slice(1))).join('');
     }
   },
   filters: {
